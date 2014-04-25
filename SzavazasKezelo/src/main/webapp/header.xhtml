@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html">
+ <div class="pure-g">
+            <div class="pure-u-1">
+                <h1 id="header-title">Szavazáskezelő</h1>
+            </div>
+        </div>
+        <div class="pure-g">
+            <div class="pure-u-1-8"></div>
+            <div class="pure-u-3-4">
+                <div class="pure-g">
+                    <div class="pure-u-1-4">
+                        <h:link outcome="/polls/List" value="Szavazások" class="pure-button"/>
+                    </div>
+                    <div class="pure-u-1-4">
+                        <h:link outcome="/pollQuestions/List" value="Kérdések" class="pure-button"/>
+                    </div>
+                    <div class="pure-u-1-4">
+                        <h:link outcome="/pollAnswers/List" value="Válaszok" class="pure-button"/>
+                    </div>
+                    <div class="pure-u-1-4">
+                        <h:link outcome="/pollFillings/List" value="Show All PollFillings Items" class="pure-button"/>
+                    </div>  
+                </div>
+            </div>
+            <div class="pure-u-1-8"></div>
+        </div>
+    
+</ui:composition>

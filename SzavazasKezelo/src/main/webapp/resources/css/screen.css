@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2014.04.25., 21:11:59
+    Author     : anonymus0211
+*/
+@import url("http://yui.yahooapis.com/pure/0.4.2/base-min.css");
+@import url("http://yui.yahooapis.com/pure/0.4.2/pure-min.css");
+
+
+.button-success,
+.button-error,
+.button-warning,
+.button-secondary {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button-success {
+    background: rgb(28, 184, 65); 
+}
+
+.button-error {
+    background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+.button-warning {
+    background: rgb(223, 117, 20); /* this is an orange */
+}
+
+.button-secondary {
+    background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+#header-title{
+    text-align: center;
+    font-size: 72px;
+}

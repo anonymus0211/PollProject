@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPollAnswersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPollAnswersLabel_answer}" for="answer" />
+                    <h:inputText id="answer" value="#{pollAnswersController.selected.answer}" title="#{bundle.EditPollAnswersTitle_answer}" />
+                    <h:outputLabel value="#{bundle.EditPollAnswersLabel_pollQuestionId}" for="pollQuestionId" />
+                    <h:selectOneMenu id="pollQuestionId" value="#{pollAnswersController.selected.pollQuestionId}" title="#{bundle.EditPollAnswersTitle_pollQuestionId}" >
+                        <f:selectItems value="#{pollQuestionsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{pollAnswersController.update}" value="#{bundle.EditPollAnswersSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPollAnswersViewLink}"/>
+                <br />
+                <h:commandLink action="#{pollAnswersController.prepareList}" value="#{bundle.EditPollAnswersShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPollAnswersIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
