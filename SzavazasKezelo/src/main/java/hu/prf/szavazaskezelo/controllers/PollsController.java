@@ -1,10 +1,9 @@
 package hu.prf.szavazaskezelo.controllers;
 
-import hu.prf.szavazaskezelo.entitites.Polls;
+import hu.prf.szavazaskezelo.beans.PollsFacade;
 import hu.prf.szavazaskezelo.controllers.util.JsfUtil;
 import hu.prf.szavazaskezelo.controllers.util.PaginationHelper;
-import hu.prf.szavazaskezelo.beans.PollsFacade;
-
+import hu.prf.szavazaskezelo.entitites.Polls;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -30,6 +29,7 @@ public class PollsController implements Serializable {
     private int selectedItemIndex;
 
     public PollsController() {
+       
     }
 
     public Polls getSelected() {
@@ -83,7 +83,7 @@ public class PollsController implements Serializable {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PollsCreated"));
-            return prepareCreate();
+            return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

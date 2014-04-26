@@ -11,22 +11,22 @@
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
             </h:panelGroup>
-            <h:form>
+            <h:form class="pure-form pure-form-stacked">
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditPollsLabel_pollTitle}" for="pollTitle" />
-                    <h:inputText id="pollTitle" value="#{pollsController.selected.pollTitle}" title="#{bundle.EditPollsTitle_pollTitle}" />
+                    <h:outputLabel value="#{bundle.pollTitle}" for="pollTitle" />
+                    <h:inputText id="pollTitle" value="#{pollsController.selected.pollTitle}" title="#{bundle.EditPollsTitle_pollTitle}" requiredMessage="#{bundle.RequiredField}" >
+                        <f:validateRequired />
+                    </h:inputText>
                 </h:panelGrid>
-                <h:commandLink action="#{pollsController.update}" value="#{bundle.EditPollsSaveLink}"/>
+                <h:commandLink action="#{pollsController.update}" value="#{bundle.SaveLink}" class="pure-button button-success"/>
                 <br />
                 <br />
-                <h:link outcome="View" value="#{bundle.EditPollsViewLink}"/>
+                <h:link outcome="View" value="#{bundle.EditPollsViewLink}" class="pure-button button-margin"/>
                 <br />
-                <h:commandLink action="#{pollsController.prepareList}" value="#{bundle.EditPollsShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditPollsIndexLink}" />
+                <h:commandLink action="#{pollsController.prepareList}" value="#{bundle.PollsShowAllLink}" immediate="true" class="pure-button"/>
+
             </h:form>
         </ui:define>
     </ui:composition>

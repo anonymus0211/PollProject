@@ -37,6 +37,7 @@ public class PollQuestionsController implements Serializable {
             current = new PollQuestions();
             selectedItemIndex = -1;
         }
+        
         return current;
     }
 

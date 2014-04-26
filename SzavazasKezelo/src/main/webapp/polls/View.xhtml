@@ -7,31 +7,22 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ViewPollsTitle}"></h:outputText>
+            <h:outputText value="#{pollsController.selected.pollTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewPollsLabel_id}"/>
-                    <h:outputText value="#{pollsController.selected.id}" title="#{bundle.ViewPollsTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewPollsLabel_pollTitle}"/>
-                    <h:outputText value="#{pollsController.selected.pollTitle}" title="#{bundle.ViewPollsTitle_pollTitle}"/>
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{pollsController.destroyAndView}" value="#{bundle.ViewPollsDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewPollsEditLink}"/>
-                <br />
-                <h:commandLink action="#{pollsController.prepareCreate}" value="#{bundle.ViewPollsCreateLink}" />
-                <br />
-                <h:commandLink action="#{pollsController.prepareList}" value="#{bundle.ViewPollsShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewPollsIndexLink}"/>
+                <h:commandLink action="#{pollsController.prepareCreate}" value="#{bundle.Filling}" class="pure-button button-fill"/>
+                <h:commandLink action="#{pollsController.prepareCreate}" value="#{bundle.PollsCreateLink}" class="pure-button button-success  button-margin-vertical"/>
+                <h:link outcome="Edit" value="#{bundle.EditLink}" class="pure-button button-update button-margin-vertical"/>
+                <h:commandLink action="#{pollsController.destroyAndView}" value="#{bundle.DestroyLink}" class="pure-button button-delete button-margin-vertical"/>
+                <h:commandLink action="#{pollsController.prepareList}" value="#{bundle.PollsShowAllLink}" class="pure-button button-margin-vertical"/>
+                
 
             </h:form>
         </ui:define>

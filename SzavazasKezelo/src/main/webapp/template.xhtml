@@ -12,12 +12,16 @@
 
     <h:body>
         <ui:include src="/header.xhtml"></ui:include>
-        <h1>
-            <ui:insert name="title">Default Title</ui:insert>
-        </h1>
-        <p>
-            <ui:insert name="body">Default Body</ui:insert>
-        </p>
+        <div class="pure-g">
+            <div class="pure-u-1-8"></div>
+            <div class="pure-u-3-4">
+                <h1>
+                    <ui:insert name="title">Default Title</ui:insert>
+                </h1>
+                <ui:insert name="body">Default Body</ui:insert>
+            </div>
+            <div class="pure-u-1-8"></div>
+        </div>
     </h:body>
 
 </html>

@@ -10,6 +10,56 @@ and open the template in the editor.
 @import url("http://yui.yahooapis.com/pure/0.4.2/base-min.css");
 @import url("http://yui.yahooapis.com/pure/0.4.2/pure-min.css");
 
+body{
+    background: #fff; /*#CBFFF9;*/
+}
+
+.message-box{
+    list-style-type: none;
+}
+
+footer #created_by ul{
+    list-style-type: none;
+}
+
+footer #created_by{
+    font-size: 80%;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+    -webkit-transition: text-decoration 1s;
+    transition: text-decoration 1s;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+#header-menu{
+    box-sizing: border-box;
+    border-top: 3px solid grey;
+    border-bottom: 3px solid grey;
+}
+
+.header-menu-item{
+    text-align: center;
+    -webkit-transition: background-color 1s;
+    transition: background-color 1s;
+}
+
+.header-menu-item:hover{
+    background-color: grey;
+    
+}
+
+.header-menu-item a{
+    font-size: 30px;
+    padding: 0.5em 1em;
+    display: inline-block;
+    text-align: center;
+}
 
 .button-success,
 .button-error,
@@ -24,19 +74,31 @@ and open the template in the editor.
     background: rgb(28, 184, 65); 
 }
 
-.button-error {
+.button-delete {
     background: rgb(202, 60, 60); /* this is a maroon */
 }
 
-.button-warning {
+.button-update {
     background: rgb(223, 117, 20); /* this is an orange */
 }
 
-.button-secondary {
+.button-poll {
     background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+.button-margin {
+    margin: 0.5em 0;
+}
+
+.button-margin-vertical {
+    margin: 0 0.5em;
 }
 
 #header-title{
     text-align: center;
     font-size: 72px;
+}
+
+.pure-table-custom{
+    width: 100%;
 }
