@@ -11,6 +11,7 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author anonymus0211
+ * @author Ano4Ever
  */
 @Entity
 @Table(name = "polls")
@@ -43,7 +44,7 @@ public class Polls implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "poll_title")
     private String pollTitle;
-    @OneToMany(mappedBy = "pollId")
+    @OneToMany(mappedBy = "pollId", fetch = FetchType.LAZY)
     private Collection<PollQuestions> pollQuestionsCollection;
 
     public Polls() {
@@ -100,7 +101,8 @@ public class Polls implements Serializable {
 
     @Override
     public String toString() {
-        return "hu.prf.szavazaskezelo.entitites.Polls[ id=" + id + " ]";
+        //return "hu.prf.szavazaskezelo.entitites.Polls[ id=" + id + " ]";
+        return pollTitle;
     }
     
 }

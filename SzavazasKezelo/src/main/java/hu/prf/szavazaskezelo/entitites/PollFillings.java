@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author anonymus0211
+ * @author Ano4Ever
  */
 @Entity
 @Table(name = "poll_fillings")
@@ -38,10 +39,10 @@ public class PollFillings implements Serializable {
     @Column(name = "id")
     private Long id;
     @JoinColumn(name = "poll_question_id", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private PollQuestions pollQuestionId;
     @JoinColumn(name = "poll_answers_id", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private PollAnswers pollAnswersId;
 
     public PollFillings() {

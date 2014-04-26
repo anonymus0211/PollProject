@@ -12,7 +12,7 @@
         <ui:define name="body">
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
                 </h:panelGroup>
                 <h:outputText escape="false" value="#{bundle.ListPollQuestionsEmpty}" rendered="#{pollQuestionsController.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{pollQuestionsController.items.rowCount > 0}">

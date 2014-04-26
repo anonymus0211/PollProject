@@ -11,27 +11,25 @@
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreatePollQuestionsLabel_pollQuestion}" for="pollQuestion" />
                     <h:inputText id="pollQuestion" value="#{pollQuestionsController.selected.pollQuestion}" title="#{bundle.CreatePollQuestionsTitle_pollQuestion}" />
-                    <h:outputLabel value="#{bundle.CreatePollQuestionsLabel_multiple}" for="multiple" />
-                    <h:inputText id="multiple" value="#{pollQuestionsController.selected.multiple}" title="#{bundle.CreatePollQuestionsTitle_multiple}" />
+                    <h:outputLabel value="#{bundle.PollQuestionsMultiple}" for="multiple" />
+                    <h:inputText id="multiple" value="#{pollQuestionsController.selected.multiple}" title="#{bundle.PollQuestionMultiple}" />
                     <h:outputLabel value="#{bundle.CreatePollQuestionsLabel_pollId}" for="pollId" />
                     <h:selectOneMenu id="pollId" value="#{pollQuestionsController.selected.pollId}" title="#{bundle.CreatePollQuestionsTitle_pollId}" >
                         <f:selectItems value="#{pollsController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{pollQuestionsController.create}" value="#{bundle.CreatePollQuestionsSaveLink}" />
+                <h:commandLink action="#{pollQuestionsController.create}" value="#{bundle.SaveLink}" class="pure-button button-success" />
                 <br />
                 <br />
-                <h:commandLink action="#{pollQuestionsController.prepareList}" value="#{bundle.CreatePollQuestionsShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreatePollQuestionsIndexLink}"/>
+                <h:commandLink action="#{pollQuestionsController.prepareList}" value="#{bundle.PollQuestionsShowAllLink}" immediate="true" class="pure-button"/>
+                
             </h:form>
         </ui:define>
     </ui:composition>

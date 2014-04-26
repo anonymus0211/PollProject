@@ -11,6 +11,7 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author anonymus0211
+ * @author Ano4Ever
  */
 @Entity
 @Table(name = "poll_questions")
@@ -37,8 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PollQuestions.findByPollQuestion", query = "SELECT p FROM PollQuestions p WHERE p.pollQuestion = :pollQuestion"),
     @NamedQuery(name = "PollQuestions.findByMultiple", query = "SELECT p FROM PollQuestions p WHERE p.multiple = :multiple")})
 public class PollQuestions implements Serializable {
-    @OneToMany(mappedBy = "pollQuestionId")
-    private Collection<PollFillings> pollFillingsCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,10 +49,12 @@ public class PollQuestions implements Serializable {
     private String pollQuestion;
     @Column(name = "multiple")
     private Boolean multiple;
+    @OneToMany(mappedBy = "pollQuestionId", fetch = FetchType.LAZY)
+    private Collection<PollFillings> pollFillingsCollection;
     @JoinColumn(name = "poll_id", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Polls pollId;
-    @OneToMany(mappedBy = "pollQuestionId")
+    @OneToMany(mappedBy = "pollQuestionId", fetch = FetchType.LAZY)
     private Collection<PollAnswers> pollAnswersCollection;
 
     public PollQuestions() {
@@ -85,6 +86,15 @@ public class PollQuestions implements Serializable {
 
     public void setMultiple(Boolean multiple) {
         this.multiple = multiple;
+    }
+
+    @XmlTransient
+    public Collection<PollFillings> getPollFillingsCollection() {
+        return pollFillingsCollection;
+    }
+
+    public void setPollFillingsCollection(Collection<PollFillings> pollFillingsCollection) {
+        this.pollFillingsCollection = pollFillingsCollection;
     }
 
     public Polls getPollId() {
@@ -127,15 +137,6 @@ public class PollQuestions implements Serializable {
     @Override
     public String toString() {
         return "hu.prf.szavazaskezelo.entitites.PollQuestions[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<PollFillings> getPollFillingsCollection() {
-        return pollFillingsCollection;
-    }
-
-    public void setPollFillingsCollection(Collection<PollFillings> pollFillingsCollection) {
-        this.pollFillingsCollection = pollFillingsCollection;
     }
     
 }
