@@ -114,7 +114,7 @@ public class PollAnswers implements Serializable {
 
     @Override
     public String toString() {
-        return "hu.prf.szavazaskezelo.entitites.PollAnswers[ id=" + id + " ]";
+        return answer;
     }
     
 }

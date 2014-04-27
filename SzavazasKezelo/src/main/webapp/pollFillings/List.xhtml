@@ -12,49 +12,57 @@
         <ui:define name="body">
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
                 </h:panelGroup>
                 <h:outputText escape="false" value="#{bundle.ListPollFillingsEmpty}" rendered="#{pollFillingsController.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{pollFillingsController.items.rowCount > 0}">
                     <h:outputText value="#{pollFillingsController.pagination.pageFirstItem + 1}..#{pollFillingsController.pagination.pageLastItem + 1}/#{pollFillingsController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{pollFillingsController.previous}" value="#{bundle.Previous} #{pollFillingsController.pagination.pageSize}" rendered="#{pollFillingsController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{pollFillingsController.next}" value="#{bundle.Next} #{pollFillingsController.pagination.pageSize}" rendered="#{pollFillingsController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{pollFillingsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPollFillingsTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </h:column>
+                    <h:dataTable value="#{pollFillingsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" class="pure-table pure-table-horizontal pure-table-custom">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPollFillingsTitle_pollQuestionId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.pollQuestionId}"/>
+                            <h:commandLink value="#{item.pollQuestionId.pollQuestion}" action="poll_question_navigation">
+                                <f:param value="#{item.pollQuestionId.id}" name="poll_question_id" ></f:param>
+                            </h:commandLink>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPollFillingsTitle_pollAnswersId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.pollAnswersId}"/>
+                            <h:commandLink value="#{item.pollAnswersId.answer}" action="poll_answer_navigation">
+                                <f:param value="#{item.pollAnswersId.id}" name="poll_answer_id" ></f:param>
+                            </h:commandLink>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{pollFillingsController.prepareView}" value="#{bundle.ListPollFillingsViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{pollFillingsController.prepareEdit}" value="#{bundle.ListPollFillingsEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{pollFillingsController.destroy}" value="#{bundle.ListPollFillingsDestroyLink}"/>
+                            <h:commandLink action="#{pollFillingsController.prepareView}" value="#{bundle.ViewLink}" class="pure-button button-success"/>
                         </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{pollFillingsController.prepareEdit}" value="#{bundle.EditLink}" class="pure-button button-update"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{pollFillingsController.destroy}" value="#{bundle.DestroyLink}" class="pure-button button-delete"/>
+                        </h:column>
+
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{pollFillingsController.prepareCreate}" value="#{bundle.ListPollFillingsCreateLink}"/>
+                <h:commandLink action="#{pollFillingsController.prepareCreate}" value="#{bundle.ListPollFillingsCreateLink}" class="pure-button"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.ListPollFillingsIndexLink}"/>
+                <h:link outcome="/index" value="#{bundle.IndexLink}" class="pure-button"/>
             </h:form>
         </ui:define>
     </ui:composition>

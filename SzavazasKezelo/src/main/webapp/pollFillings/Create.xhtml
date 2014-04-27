@@ -11,9 +11,9 @@
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
             </h:panelGroup>
-            <h:form>
+            <h:form class="pure-form pure-form-stacked">
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreatePollFillingsLabel_pollQuestionId}" for="pollQuestionId" />
                     <h:selectOneMenu id="pollQuestionId" value="#{pollFillingsController.selected.pollQuestionId}" title="#{bundle.CreatePollFillingsTitle_pollQuestionId}" >
@@ -24,14 +24,8 @@
                         <f:selectItems value="#{pollAnswersController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
-                <br />
-                <h:commandLink action="#{pollFillingsController.create}" value="#{bundle.CreatePollFillingsSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{pollFillingsController.prepareList}" value="#{bundle.CreatePollFillingsShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreatePollFillingsIndexLink}"/>
+                <h:commandLink action="#{pollFillingsController.create}" value="#{bundle.SaveLink}" class="pure-button button-success button-margin"/>
+                
             </h:form>
         </ui:define>
     </ui:composition>

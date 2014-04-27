@@ -9,7 +9,8 @@ import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -19,7 +20,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "pollAnswersController")
-@SessionScoped
+@RequestScoped
 public class PollAnswersController implements Serializable {
 
     private PollAnswers current;
@@ -29,15 +30,29 @@ public class PollAnswersController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    @ManagedProperty("#{param.poll_answer_id}")
+    private String poll_answer_id;
+    
     public PollAnswersController() {
     }
 
     public PollAnswers getSelected() {
+        if (poll_answer_id != null){
+            current = (PollAnswers) getFacade().find(Long.parseLong(poll_answer_id));
+        }
         if (current == null) {
             current = new PollAnswers();
             selectedItemIndex = -1;
         }
         return current;
+    }
+    
+    public String getpoll_answer_id(){
+        return poll_answer_id;
+    }
+    
+    public void setpoll_answer_id(String poll_answer_id){
+        this.poll_answer_id = poll_answer_id;
     }
 
     private PollAnswersFacade getFacade() {
