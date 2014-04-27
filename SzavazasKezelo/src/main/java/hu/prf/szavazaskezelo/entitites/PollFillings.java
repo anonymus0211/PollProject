@@ -39,10 +39,10 @@ public class PollFillings implements Serializable {
     @Column(name = "id")
     private Long id;
     @JoinColumn(name = "poll_question_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private PollQuestions pollQuestionId;
     @JoinColumn(name = "poll_answers_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private PollAnswers pollAnswersId;
 
     public PollFillings() {

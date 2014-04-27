@@ -7,33 +7,27 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ViewPollAnswersTitle}"></h:outputText>
+            <h:outputText value="#{pollAnswersController.selected.answer}"></h:outputText>
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewPollAnswersLabel_id}"/>
-                    <h:outputText value="#{pollAnswersController.selected.id}" title="#{bundle.ViewPollAnswersTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewPollAnswersLabel_answer}"/>
-                    <h:outputText value="#{pollAnswersController.selected.answer}" title="#{bundle.ViewPollAnswersTitle_answer}"/>
-                    <h:outputText value="#{bundle.ViewPollAnswersLabel_pollQuestionId}"/>
-                    <h:outputText value="#{pollAnswersController.selected.pollQuestionId}" title="#{bundle.ViewPollAnswersTitle_pollQuestionId}"/>
+                    <h:outputText value="#{bundle.PollAnswersPollQuestionId}"/>
+                    <h:commandLink value="#{pollAnswersController.selected.pollQuestionId.pollQuestion}" action="poll_question_navigation">
+                        <f:param value="#{pollAnswersController.selected.pollQuestionId.id}" name="poll_question_id" ></f:param>
+                    </h:commandLink>
+                    <h:outputText value="#{bundle.PollAnswersPollTitle}"/>
+                    <h:commandLink value="#{pollAnswersController.selected.pollQuestionId.pollId.pollTitle}" action="poll_navigation">
+                        <f:param value="#{pollAnswersController.selected.pollQuestionId.pollId.id}" name="poll_id" ></f:param>
+                    </h:commandLink>
                 </h:panelGrid>
-                <br />
-                <h:commandLink action="#{pollAnswersController.destroyAndView}" value="#{bundle.ViewPollAnswersDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewPollAnswersEditLink}"/>
-                <br />
-                <h:commandLink action="#{pollAnswersController.prepareCreate}" value="#{bundle.ViewPollAnswersCreateLink}" />
-                <br />
-                <h:commandLink action="#{pollAnswersController.prepareList}" value="#{bundle.ViewPollAnswersShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewPollAnswersIndexLink}"/>
+                <h:link outcome="Edit" value="#{bundle.EditLink}" class="pure-button button-update button-margin"/>
+                <h:commandLink action="#{pollAnswersController.destroyAndView}" value="#{bundle.DestroyLink}" class="pure-button button-delete button-margin-vertical"/>
+                <h:commandLink action="#{pollAnswersController.prepareCreate}" value="#{bundle.ViewPollAnswersCreateLink}" class="pure-button" />
+
 
             </h:form>
         </ui:define>

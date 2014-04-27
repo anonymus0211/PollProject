@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" >
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -13,14 +14,14 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
             </h:panelGroup>
-            <h:form>
+            <h:form class="pure-form pure-form-stacked">
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreatePollQuestionsLabel_pollQuestion}" for="pollQuestion" />
                     <h:inputText id="pollQuestion" value="#{pollQuestionsController.selected.pollQuestion}" title="#{bundle.CreatePollQuestionsTitle_pollQuestion}" />
-                    <h:outputLabel value="#{bundle.PollQuestionsMultiple}" for="multiple" />
-                    <h:inputText id="multiple" value="#{pollQuestionsController.selected.multiple}" title="#{bundle.PollQuestionMultiple}" />
-                    <h:outputLabel value="#{bundle.CreatePollQuestionsLabel_pollId}" for="pollId" />
-                    <h:selectOneMenu id="pollId" value="#{pollQuestionsController.selected.pollId}" title="#{bundle.CreatePollQuestionsTitle_pollId}" >
+                    <h:outputLabel value="#{bundle.PollQuestionsMultiple}" for="pollQuestion" />
+                    <p:selectBooleanButton value="#{pollQuestionsController.selected.multiple}" onLabel="Igen" offLabel="Nem" />  
+                    <h:outputLabel value="#{bundle.PollQuestionsPollId}" for="pollId" />
+                    <h:selectOneMenu id="pollId" value="#{pollQuestionsController.selected.pollId}" title="#{bundle.PollQuestionsPollId}" >
                         <f:selectItems value="#{pollsController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -19,7 +21,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "pollQuestionsController")
-@SessionScoped
+@RequestScoped
 public class PollQuestionsController implements Serializable {
 
     private PollQuestions current;
@@ -29,10 +31,17 @@ public class PollQuestionsController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    @ManagedProperty("#{param.poll_question_id}")
+    private String poll_question_id;
+    
     public PollQuestionsController() {
     }
 
     public PollQuestions getSelected() {
+        if(poll_question_id != null){
+            current = (PollQuestions) getFacade().find(Long.parseLong(poll_question_id));
+        }
+        
         if (current == null) {
             current = new PollQuestions();
             selectedItemIndex = -1;
@@ -78,6 +87,14 @@ public class PollQuestionsController implements Serializable {
         current = new PollQuestions();
         selectedItemIndex = -1;
         return "Create";
+    }
+    
+    public String getpoll_question_id(){
+        return poll_question_id;
+    }
+    
+    public void setpoll_question_id(String poll_question_id){
+        this.poll_question_id = poll_question_id;
     }
 
     public String create() {

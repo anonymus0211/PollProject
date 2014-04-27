@@ -7,7 +7,7 @@
 package hu.prf.szavazaskezelo.entitites;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,10 +46,10 @@ public class PollAnswers implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "answer")
     private String answer;
-    @OneToMany(mappedBy = "pollAnswersId", fetch = FetchType.LAZY)
-    private Collection<PollFillings> pollFillingsCollection;
+    @OneToMany(mappedBy = "pollAnswersId", fetch = FetchType.EAGER)
+    private Set<PollFillings> pollFillingsSet;
     @JoinColumn(name = "poll_question_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private PollQuestions pollQuestionId;
 
     public PollAnswers() {
@@ -76,12 +76,12 @@ public class PollAnswers implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PollFillings> getPollFillingsCollection() {
-        return pollFillingsCollection;
+    public Set<PollFillings> getPollFillingsSet() {
+        return pollFillingsSet;
     }
 
-    public void setPollFillingsCollection(Collection<PollFillings> pollFillingsCollection) {
-        this.pollFillingsCollection = pollFillingsCollection;
+    public void setPollFillingsSet(Set<PollFillings> pollFillingsSet) {
+        this.pollFillingsSet = pollFillingsSet;
     }
 
     public PollQuestions getPollQuestionId() {

@@ -7,7 +7,7 @@
 package hu.prf.szavazaskezelo.entitites;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,13 +49,13 @@ public class PollQuestions implements Serializable {
     private String pollQuestion;
     @Column(name = "multiple")
     private Boolean multiple;
-    @OneToMany(mappedBy = "pollQuestionId", fetch = FetchType.LAZY)
-    private Collection<PollFillings> pollFillingsCollection;
+    @OneToMany(mappedBy = "pollQuestionId", fetch = FetchType.EAGER)
+    private Set<PollFillings> pollFillingsSet;
     @JoinColumn(name = "poll_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Polls pollId;
-    @OneToMany(mappedBy = "pollQuestionId", fetch = FetchType.LAZY)
-    private Collection<PollAnswers> pollAnswersCollection;
+    @OneToMany(mappedBy = "pollQuestionId", fetch = FetchType.EAGER)
+    private Set<PollAnswers> pollAnswersSet;
 
     public PollQuestions() {
     }
@@ -89,12 +89,12 @@ public class PollQuestions implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PollFillings> getPollFillingsCollection() {
-        return pollFillingsCollection;
+    public Set<PollFillings> getPollFillingsSet() {
+        return pollFillingsSet;
     }
 
-    public void setPollFillingsCollection(Collection<PollFillings> pollFillingsCollection) {
-        this.pollFillingsCollection = pollFillingsCollection;
+    public void setPollFillingsSet(Set<PollFillings> pollFillingsSet) {
+        this.pollFillingsSet = pollFillingsSet;
     }
 
     public Polls getPollId() {
@@ -106,12 +106,12 @@ public class PollQuestions implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PollAnswers> getPollAnswersCollection() {
-        return pollAnswersCollection;
+    public Set<PollAnswers> getPollAnswersSet() {
+        return pollAnswersSet;
     }
 
-    public void setPollAnswersCollection(Collection<PollAnswers> pollAnswersCollection) {
-        this.pollAnswersCollection = pollAnswersCollection;
+    public void setPollAnswersSet(Set<PollAnswers> pollAnswersSet) {
+        this.pollAnswersSet = pollAnswersSet;
     }
 
     @Override
@@ -136,7 +136,7 @@ public class PollQuestions implements Serializable {
 
     @Override
     public String toString() {
-        return "hu.prf.szavazaskezelo.entitites.PollQuestions[ id=" + id + " ]";
+        return ((pollId != null) ? pollId.toString() : "Nincs Szavazás") + pollQuestion ;
     }
     
 }

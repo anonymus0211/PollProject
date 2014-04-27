@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -18,7 +20,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "pollsController")
-@SessionScoped
+@RequestScoped
 public class PollsController implements Serializable {
 
     private Polls current;
@@ -28,15 +30,25 @@ public class PollsController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    @ManagedProperty("#{param.poll_id}")
+    private String poll_id;
+
     public PollsController() {
-       
+
     }
 
     public Polls getSelected() {
+        if(poll_id != null){
+            current = (Polls) getFacade().find( Long.parseLong(poll_id));
+        }
+        
         if (current == null) {
             current = new Polls();
             selectedItemIndex = -1;
         }
+        
+        
+        //System.out.println("CURRENTLY_SELECTED_GET: " + current.toString());
         return current;
     }
 
@@ -68,10 +80,19 @@ public class PollsController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Polls) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (poll_id == null) {
+            current = (Polls) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        
+        } else {
+            
+            current = (Polls) getFacade().find( Long.parseLong(poll_id));
+            //System.out.println("CURRENTLY_SELECTED: " + current.toString());
+        }
+            
         return "View";
     }
+    
 
     public String prepareCreate() {
         current = new Polls();
@@ -186,6 +207,14 @@ public class PollsController implements Serializable {
 
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+    }
+
+    public String getpoll_id() {
+        return poll_id;
+    }
+
+    public void setpoll_id(String poll_id) {
+        this.poll_id = poll_id;
     }
 
     @FacesConverter(forClass = Polls.class)

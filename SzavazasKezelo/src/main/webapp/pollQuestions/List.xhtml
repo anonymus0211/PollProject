@@ -19,48 +19,51 @@
                     <h:outputText value="#{pollQuestionsController.pagination.pageFirstItem + 1}..#{pollQuestionsController.pagination.pageLastItem + 1}/#{pollQuestionsController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{pollQuestionsController.previous}" value="#{bundle.Previous} #{pollQuestionsController.pagination.pageSize}" rendered="#{pollQuestionsController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{pollQuestionsController.next}" value="#{bundle.Next} #{pollQuestionsController.pagination.pageSize}" rendered="#{pollQuestionsController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{pollQuestionsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:dataTable value="#{pollQuestionsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" class="pure-table pure-table-horizontal pure-table-custom">
+
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPollQuestionsTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPollQuestionsTitle_pollQuestion}"/>
+                                <h:outputText value="#{bundle.CreatePollQuestionsLabel_pollQuestion}"/>
                             </f:facet>
                             <h:outputText value="#{item.pollQuestion}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPollQuestionsTitle_multiple}"/>
+                                <h:outputText value="#{bundle.PollQuestionsMultiple}"/>
                             </f:facet>
-                            <h:outputText value="#{item.multiple}"/>
+                            <h:outputText value="#{item.multiple ? 'Igen' : 'Nem'}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPollQuestionsTitle_pollId}"/>
+                                <h:outputText value="#{bundle.PollQuestionsPollId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.pollId}"/>
+                            <h:commandLink value="#{item.pollId.pollTitle}" action="poll_navigation">
+                                <f:param value="#{item.pollId.id}" name="poll_id" ></f:param>
+                            </h:commandLink>
+                            
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{pollQuestionsController.prepareView}" value="#{bundle.ListPollQuestionsViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{pollQuestionsController.prepareEdit}" value="#{bundle.ListPollQuestionsEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{pollQuestionsController.destroy}" value="#{bundle.ListPollQuestionsDestroyLink}"/>
+                            <h:commandLink action="#{pollQuestionsController.prepareView}" value="#{bundle.ViewLink}" class="pure-button button-success"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{pollQuestionsController.prepareEdit}" value="#{bundle.EditLink}" class="pure-button button-update"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{pollQuestionsController.destroy}" value="#{bundle.DestroyLink}" class="pure-button button-delete"/>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{pollQuestionsController.prepareCreate}" value="#{bundle.ListPollQuestionsCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListPollQuestionsIndexLink}"/>
+                <h:commandLink action="#{pollQuestionsController.prepareCreate}" value="#{bundle.PollQuestionsCreateLink}" class="pure-button"/>
             </h:form>
         </ui:define>
     </ui:composition>

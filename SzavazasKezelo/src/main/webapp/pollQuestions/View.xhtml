@@ -7,36 +7,26 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ViewPollQuestionsTitle}"></h:outputText>
+            <h:outputText value="#{pollQuestionsController.selected.pollQuestion}"></h:outputText>
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
-               <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
+                <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
             </h:panelGroup>
-            <h:form>
+            <h:form styleClass="jsfcrud_list_form" class="pure-form pure-form-stacked">
                 <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewPollQuestionsLabel_id}"/>
-                    <h:outputText value="#{pollQuestionsController.selected.id}" title="#{bundle.ViewPollQuestionsTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewPollQuestionsLabel_pollQuestion}"/>
-                    <h:outputText value="#{pollQuestionsController.selected.pollQuestion}" title="#{bundle.ViewPollQuestionsTitle_pollQuestion}"/>
-                    <h:outputText value="#{bundle.ViewPollQuestionsLabel_multiple}"/>
-                    <h:outputText value="#{pollQuestionsController.selected.multiple}" title="#{bundle.ViewPollQuestionsTitle_multiple}"/>
-                    <h:outputText value="#{bundle.ViewPollQuestionsLabel_pollId}"/>
-                    <h:outputText value="#{pollQuestionsController.selected.pollId}" title="#{bundle.ViewPollQuestionsTitle_pollId}"/>
+                    <h:outputText value="#{bundle.PollQuestionsMultiple}"/>
+                    <h:outputText value="#{pollQuestionsController.selected.multiple ? '  Igen' : '  Nem' }" title="#{bundle.PollQuestionsMultiple}"/>
+                    <h:outputText value="#{bundle.PollQuestionsPollId}"/>
+                    <h:commandLink value="#{pollQuestionsController.selected.pollId.pollTitle}" action="poll_navigation">
+                        <f:param value="#{pollQuestionsController.selected.pollId.id}" name="poll_id" ></f:param>
+                    </h:commandLink>
                 </h:panelGrid>
-                <br />
-                <h:commandLink action="#{pollQuestionsController.destroyAndView}" value="#{bundle.ViewPollQuestionsDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewPollQuestionsEditLink}"/>
-                <br />
-                <h:commandLink action="#{pollQuestionsController.prepareCreate}" value="#{bundle.ViewPollQuestionsCreateLink}" />
-                <br />
-                <h:commandLink action="#{pollQuestionsController.prepareList}" value="#{bundle.ViewPollQuestionsShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewPollQuestionsIndexLink}"/>
+                <h:commandLink action="#{pollQuestionsController.prepareCreate}" value="#{bundle.PollQuestionCreateLink}" class="pure-button button-success"/>
+                <h:link outcome="Edit" value="#{bundle.EditLink}" class="pure-button button-update button-margin-vertical"/>
+                <h:commandLink action="#{pollQuestionsController.destroyAndView}" value="#{bundle.DestroyLink}" class="pure-button button-delete"/>
 
+                
             </h:form>
         </ui:define>
     </ui:composition>

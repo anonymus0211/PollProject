@@ -18,8 +18,18 @@ body{
     list-style-type: none;
 }
 
+footer #created_by{
+    margin-top: 20px;
+    text-align: center;
+}
+
 footer #created_by ul{
     list-style-type: none;
+}
+
+footer #created_by ul li{
+    padding: 0 0.5em;
+    display: inline;
 }
 
 footer #created_by{

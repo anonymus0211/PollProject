@@ -12,5 +12,52 @@
             <base-name>/Bundle</base-name>
             <var>bundle</var>
         </resource-bundle>
+        
     </application>
+    <navigation-rule>
+        <from-view-id>/pollQuestions/List.xhtml</from-view-id>
+        <navigation-case>
+            
+            <from-outcome>poll_navigation</from-outcome>
+            <to-view-id>/polls/View.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/pollQuestions/View.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>poll_navigation</from-outcome>
+            <to-view-id>/polls/View.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/pollAnswers/List.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>poll_navigation</from-outcome>
+            <to-view-id>/polls/View.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pollAnswers/List.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>poll_question_navigation</from-outcome>
+            <to-view-id>/pollQuestions/View.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/pollAnswers/View.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>poll_navigation</from-outcome>
+            <to-view-id>/polls/View.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pollAnswers/View.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>poll_question_navigation</from-outcome>
+            <to-view-id>/pollQuestions/View.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

@@ -7,7 +7,7 @@
 package hu.prf.szavazaskezelo.entitites;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,8 +44,8 @@ public class Polls implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "poll_title")
     private String pollTitle;
-    @OneToMany(mappedBy = "pollId", fetch = FetchType.LAZY)
-    private Collection<PollQuestions> pollQuestionsCollection;
+    @OneToMany(mappedBy = "pollId", fetch = FetchType.EAGER)
+    private Set<PollQuestions> pollQuestionsSet;
 
     public Polls() {
     }
@@ -71,12 +71,12 @@ public class Polls implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PollQuestions> getPollQuestionsCollection() {
-        return pollQuestionsCollection;
+    public Set<PollQuestions> getPollQuestionsSet() {
+        return pollQuestionsSet;
     }
 
-    public void setPollQuestionsCollection(Collection<PollQuestions> pollQuestionsCollection) {
-        this.pollQuestionsCollection = pollQuestionsCollection;
+    public void setPollQuestionsSet(Set<PollQuestions> pollQuestionsSet) {
+        this.pollQuestionsSet = pollQuestionsSet;
     }
 
     @Override
@@ -101,8 +101,7 @@ public class Polls implements Serializable {
 
     @Override
     public String toString() {
-        //return "hu.prf.szavazaskezelo.entitites.Polls[ id=" + id + " ]";
-        return pollTitle;
+        return  pollTitle;
     }
     
 }
