@@ -100,6 +100,10 @@ a:hover{
     margin: 0.5em 0;
 }
 
+.button-margin-all {
+    margin: 0.5em 0.5em;
+}
+
 .button-margin-vertical {
     margin: 0 0.5em;
 }

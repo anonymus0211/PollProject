@@ -18,6 +18,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import hu.prf.szavazaskezelo.entitites.PollQuestions;
 
 @ManagedBean(name = "pollAnswersController")
 @RequestScoped
@@ -32,6 +33,9 @@ public class PollAnswersController implements Serializable {
 
     @ManagedProperty("#{param.poll_answer_id}")
     private String poll_answer_id;
+    
+    @ManagedProperty("#{param.poll_question_id}")
+    private String poll_question_id;
     
     public PollAnswersController() {
     }
@@ -53,6 +57,14 @@ public class PollAnswersController implements Serializable {
     
     public void setpoll_answer_id(String poll_answer_id){
         this.poll_answer_id = poll_answer_id;
+    }
+    
+    public String getpoll_question_id(){
+        return poll_question_id;
+    }
+    
+    public void setpoll_question_id(String poll_question_id){
+        this.poll_question_id = poll_question_id;
     }
 
     private PollAnswersFacade getFacade() {
@@ -93,6 +105,15 @@ public class PollAnswersController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
+    
+    public String prepareCreatePartial() {
+        current = new PollAnswers();
+        if(poll_question_id != null){
+            current.setPollQuestionId( getFacade().findByPollQuestionId(Long.parseLong(poll_question_id)));
+        }
+        selectedItemIndex = -1;
+        return "poll_answer_create_navigation";
+    }
 
     public String create() {
         try {
@@ -105,6 +126,17 @@ public class PollAnswersController implements Serializable {
         }
     }
 
+        public String createPartial() {
+        try {
+            getFacade().create(current);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PollAnswersCreated"));
+            return "poll_navigation";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
+    
     public String prepareEdit() {
         current = (PollAnswers) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();

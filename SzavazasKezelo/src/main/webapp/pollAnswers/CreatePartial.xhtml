@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePollAnswersLink}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
+            </h:panelGroup>
+            <h:form class="pure-form pure-form-stacked">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePollAnswersLabel_answer}" for="answer" />
+                    <h:inputText id="answer" value="#{pollAnswersController.selected.answer}" title="#{bundle.CreatePollAnswersTitle_answer}" />
+                    <h:outputLabel value="#{bundle.CreatePollAnswersLabel_pollQuestionId}" for="pollQuestionId" />
+                    <h:selectOneMenu id="pollQuestionId" value="#{pollAnswersController.selected.pollQuestionId}" title="#{bundle.EditPollAnswersTitle_pollQuestionId}" >
+                        <f:selectItem itemLabel="Válassz eggyet" />
+                        <f:selectItems value="#{pollQuestionsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu> 
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{pollAnswersController.createPartial()}" value="#{bundle.SaveLink}" class="pure-button button-success">
+                    <f:param value="#{pollAnswersController.selected.pollQuestionId.pollId.id}" name="poll_id" />
+                </h:commandLink>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

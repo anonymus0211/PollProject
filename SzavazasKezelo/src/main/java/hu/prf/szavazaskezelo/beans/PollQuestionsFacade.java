@@ -7,9 +7,11 @@
 package hu.prf.szavazaskezelo.beans;
 
 import hu.prf.szavazaskezelo.entitites.PollQuestions;
+import hu.prf.szavazaskezelo.entitites.Polls;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -29,4 +31,8 @@ public class PollQuestionsFacade extends AbstractFacade<PollQuestions> {
         super(PollQuestions.class);
     }
     
+    public Polls findByPollId(Long pollId) {
+        TypedQuery<Polls> query = em.createNamedQuery("Polls.findById",Polls.class);
+        return query.setParameter("id", pollId).getSingleResult();
+    }
 }

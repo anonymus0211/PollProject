@@ -4,6 +4,8 @@ import hu.prf.szavazaskezelo.entitites.PollQuestions;
 import hu.prf.szavazaskezelo.controllers.util.JsfUtil;
 import hu.prf.szavazaskezelo.controllers.util.PaginationHelper;
 import hu.prf.szavazaskezelo.beans.PollQuestionsFacade;
+import hu.prf.szavazaskezelo.beans.PollsFacade;
+import hu.prf.szavazaskezelo.entitites.Polls;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -11,7 +13,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -33,20 +34,24 @@ public class PollQuestionsController implements Serializable {
 
     @ManagedProperty("#{param.poll_question_id}")
     private String poll_question_id;
-    
+
+    @ManagedProperty("#{param.poll_id}")
+    private String poll_id;
+
     public PollQuestionsController() {
     }
 
     public PollQuestions getSelected() {
-        if(poll_question_id != null){
+
+        if (poll_question_id != null) {
             current = (PollQuestions) getFacade().find(Long.parseLong(poll_question_id));
         }
-        
+
         if (current == null) {
             current = new PollQuestions();
             selectedItemIndex = -1;
         }
-        
+
         return current;
     }
 
@@ -88,13 +93,40 @@ public class PollQuestionsController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
-    
-    public String getpoll_question_id(){
-        return poll_question_id;
+
+    public String preparePollQuestionCreate(){
+        current = new PollQuestions();
+        if (poll_id != null) {
+            current.setPollId( getFacade().findByPollId(Long.parseLong(poll_id)));
+            
+        }
+        selectedItemIndex = -1;
+        return "poll_question_create_navigation";
     }
     
-    public void setpoll_question_id(String poll_question_id){
+    public String preparePollQuestionEdit(){ 
+        System.out.println("Történik valami?");
+        if (poll_question_id != null) {
+            current = getFacade().find(Long.parseLong(poll_question_id));
+        }
+        //selectedItemIndex = -1;
+        return "poll_question_edit_navigation";
+    }
+    
+    public String getpoll_question_id() {
+        return poll_question_id;
+    }
+
+    public void setpoll_question_id(String poll_question_id) {
         this.poll_question_id = poll_question_id;
+    }
+
+    public String getpoll_id() {
+        return poll_id;
+    }
+
+    public void setpoll_id(String poll_id) {
+        this.poll_id = poll_id;
     }
 
     public String create() {
@@ -106,6 +138,17 @@ public class PollQuestionsController implements Serializable {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
+    }
+    
+    public String createPartial(){
+       try {
+            getFacade().create(current);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PollQuestionsCreated"));
+            return "poll_navigation";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        } 
     }
 
     public String prepareEdit() {

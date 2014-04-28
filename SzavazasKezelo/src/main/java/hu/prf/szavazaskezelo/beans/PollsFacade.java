@@ -10,6 +10,7 @@ import hu.prf.szavazaskezelo.entitites.Polls;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,5 +29,4 @@ public class PollsFacade extends AbstractFacade<Polls> {
     public PollsFacade() {
         super(Polls.class);
     }
-    
 }

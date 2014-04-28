@@ -45,6 +45,28 @@
             <from-outcome>poll_answer_navigation</from-outcome>
             <to-view-id>/pollAnswers/View.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>poll_question_edit_navigation</from-outcome>
+            <to-view-id>/pollQuestions/Edit.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>poll_question_create_navigation</from-outcome>
+            <to-view-id>/pollQuestions/CreatePartial.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>poll_answer_create_navigation</from-outcome>
+            <to-view-id>/pollAnswers/CreatePartial.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>poll_question_edit_navigation</from-outcome>
+            <to-view-id>/pollQuestions/EditPartial.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>poll_answer_edit_navigation</from-outcome>
+            <to-view-id>/pollAnswers/EditPartial.xhtml</to-view-id>
+        </navigation-case>
+        
+        
     </navigation-rule>
     
 

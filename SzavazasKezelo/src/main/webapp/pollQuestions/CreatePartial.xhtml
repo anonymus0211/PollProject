@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" >
+    
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePollQuestionsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
+            </h:panelGroup>
+            <h:form class="pure-form pure-form-stacked">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePollQuestionsLabel_pollQuestion}" for="pollQuestion" />
+                    <h:inputText id="pollQuestion" value="#{pollQuestionsController.selected.pollQuestion}" title="#{bundle.CreatePollQuestionsTitle_pollQuestion}" />
+                    <h:outputLabel value="#{bundle.PollQuestionsMultiple}" for="pollQuestion" />
+                    <p:selectBooleanButton value="#{pollQuestionsController.selected.multiple}" onLabel="Igen" offLabel="Nem" />  
+                    <h:outputLabel value="#{bundle.PollQuestionsPollId}" for="pollId" />
+                    <h:selectOneMenu id="pollId" value="#{pollQuestionsController.selected.pollId}" title="#{bundle.PollQuestionsPollId}" >
+                        <f:selectItems value="#{pollsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{pollQuestionsController.createPartial()}" value="#{bundle.SaveLink}" class="pure-button button-success">
+                    <f:param name="poll_id" value="#{pollQuestionsController.selected.pollId.id}"></f:param>
+                </h:commandLink>
+                <br />
+                <br />
+                <h:commandLink action="#{pollQuestionsController.prepareList}" value="#{bundle.PollQuestionsShowAllLink}" immediate="true" class="pure-button"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

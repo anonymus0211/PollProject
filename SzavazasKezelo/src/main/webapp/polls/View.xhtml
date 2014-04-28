@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -14,16 +15,41 @@
                 <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                </h:panelGrid>
+                <h:commandLink value="#{bundle.ListPollQuestionsCreateLink}" action="#{pollQuestionsController.preparePollQuestionCreate()}" class="pure-button button-success button-margin">
+                    <f:param name="poll_id" value="#{pollsController.selected.id}"></f:param>
+                </h:commandLink>
+                <ul class="poll_questions">
+                    <c:forEach var="question" items="#{pollsController.selected.getPollQuestionsSet()}">
+                        <li>
+                            <h:outputText value="#{question.pollQuestion}"></h:outputText>
+                            <h:link outcome="poll_question_edit_navigation" value="#{bundle.EditLink}" class="pure-button button-update button-margin-all">
+                                <f:param name="poll_question_id" value="#{question.getId()}"></f:param>
+                            </h:link>
+                            <ul class="poll_answers">
+                                <h:commandLink value="#{bundle.ListPollAnswersCreateLink}" action="#{pollAnswersController.prepareCreatePartial()}" class="pure-button button-success button-margin-all">
+                                    <f:param name="poll_question_id" value="#{question.id}"></f:param>
+                                </h:commandLink>
+                                <c:forEach var="answer" items="#{question.getPollAnswersSet()}">
+                                    <li>
+                                        <h:outputText value="#{answer.getAnswer()}"></h:outputText>
+                                        <h:commandLink value="#{bundle.EditLink}" action="#{pollAnswersController.prepareEdit()}" class="pure-button button-update button-margin-all">
+                                            <f:param value="#{answer.getId()}" name="poll_answer_id"></f:param>
+                                        </h:commandLink>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+
+
+                        </li>
+
+                    </c:forEach>
+                </ul>
                 <br />
-                <h:commandLink action="#{pollsController.prepareCreate}" value="#{bundle.Filling}" class="pure-button button-fill"/>
+                <h:commandLink action="#{pollsController.prepareCreate}" value="#{bundle.Filling}" class="pure-button button-poll button-margin"/>
                 <h:commandLink action="#{pollsController.prepareCreate}" value="#{bundle.PollsCreateLink}" class="pure-button button-success  button-margin-vertical"/>
-                <h:link outcome="Edit" value="#{bundle.EditLink}" class="pure-button button-update button-margin-vertical"/>
+                <h:commandLink action="#{pollsController.prepareEdit()}" value="#{bundle.EditLink}" class="pure-button button-update button-margin-vertical"/>
                 <h:commandLink action="#{pollsController.destroyAndView}" value="#{bundle.DestroyLink}" class="pure-button button-delete button-margin-vertical"/>
                 <h:commandLink action="#{pollsController.prepareList}" value="#{bundle.PollsShowAllLink}" class="pure-button button-margin-vertical"/>
-                
-
             </h:form>
         </ui:define>
     </ui:composition>
