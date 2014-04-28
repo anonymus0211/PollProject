@@ -25,7 +25,9 @@
                         <f:selectItems value="#{pollsController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
-                <h:commandLink action="#{pollQuestionsController.update}" value="#{bundle.SaveLink}" class="pure-button button-success"/>
+                <h:commandLink action="#{pollQuestionsController.update}" value="#{bundle.SaveLink}" class="pure-button button-success">
+                    
+                </h:commandLink>
                 <h:link outcome="View" value="#{bundle.EditPollQuestionsViewLink}" class="pure-button button-margin-vertical"/>
 
             </h:form>

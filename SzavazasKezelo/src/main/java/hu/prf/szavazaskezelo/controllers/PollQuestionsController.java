@@ -1,18 +1,20 @@
 package hu.prf.szavazaskezelo.controllers;
 
-import hu.prf.szavazaskezelo.entitites.PollQuestions;
-import hu.prf.szavazaskezelo.controllers.util.JsfUtil;
-import hu.prf.szavazaskezelo.controllers.util.PaginationHelper;
 import hu.prf.szavazaskezelo.beans.PollQuestionsFacade;
 import hu.prf.szavazaskezelo.beans.PollsFacade;
+import hu.prf.szavazaskezelo.controllers.util.JsfUtil;
+import hu.prf.szavazaskezelo.controllers.util.PaginationHelper;
+import hu.prf.szavazaskezelo.entitites.PollQuestions;
 import hu.prf.szavazaskezelo.entitites.Polls;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -22,7 +24,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "pollQuestionsController")
-@RequestScoped
+@SessionScoped
 public class PollQuestionsController implements Serializable {
 
     private PollQuestions current;
@@ -32,17 +34,23 @@ public class PollQuestionsController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    @ManagedProperty("#{param.poll_question_id}")
     private String poll_question_id;
-
-    @ManagedProperty("#{param.poll_id}")
     private String poll_id;
 
     public PollQuestionsController() {
     }
-
+    
+    @PostConstruct
+    public void init(){
+        System.out.println("Meghívodik?");
+        poll_id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("poll_id");
+        poll_question_id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("poll_question_id");
+        System.out.println("Poll_id" + poll_id);
+        System.out.println("Poll_question_id" + poll_question_id);
+    }
+    
     public PollQuestions getSelected() {
-
+        System.out.println("Mindig meghívodik?" + poll_question_id);
         if (poll_question_id != null) {
             current = (PollQuestions) getFacade().find(Long.parseLong(poll_question_id));
         }
@@ -96,6 +104,7 @@ public class PollQuestionsController implements Serializable {
 
     public String preparePollQuestionCreate(){
         current = new PollQuestions();
+        System.out.println("CREATEBEN: " + poll_id);
         if (poll_id != null) {
             current.setPollId( getFacade().findByPollId(Long.parseLong(poll_id)));
             

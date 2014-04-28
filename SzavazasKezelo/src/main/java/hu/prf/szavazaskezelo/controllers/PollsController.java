@@ -6,10 +6,9 @@ import hu.prf.szavazaskezelo.controllers.util.PaginationHelper;
 import hu.prf.szavazaskezelo.entitites.Polls;
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -20,7 +19,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "pollsController")
-@RequestScoped
+@SessionScoped
 public class PollsController implements Serializable {
 
     private Polls current;
@@ -30,13 +29,18 @@ public class PollsController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    @ManagedProperty("#{param.poll_id}")
+    //@ManagedProperty("#{param.poll_id}")
     private String poll_id;
 
     public PollsController() {
 
     }
 
+    @PostConstruct
+    public void init(){
+        poll_id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("poll_id");
+    }
+    
     public Polls getSelected() {
         if(poll_id != null){
             current = (Polls) getFacade().find( Long.parseLong(poll_id));
@@ -76,7 +80,7 @@ public class PollsController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List";
+        return "List?faces-redirect=true";
     }
 
     public String prepareView() {
@@ -90,21 +94,21 @@ public class PollsController implements Serializable {
             //System.out.println("CURRENTLY_SELECTED: " + current.toString());
         }
             
-        return "View";
+        return "View?faces-redirect=true";
     }
     
 
     public String prepareCreate() {
         current = new Polls();
         selectedItemIndex = -1;
-        return "Create";
+        return "Create?faces-redirect=true";
     }
 
     public String create() {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PollsCreated"));
-            return "View";
+            return "View?faces-redirect=true";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -114,14 +118,14 @@ public class PollsController implements Serializable {
     public String prepareEdit() {
         current = (Polls) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return "Edit?faces-redirect=true";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PollsUpdated"));
-            return "View";
+            return "View?faces-redirect=true";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -134,7 +138,7 @@ public class PollsController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "List";
+        return "List?faces-redirect=true";
     }
 
     public String destroyAndView() {
@@ -142,11 +146,11 @@ public class PollsController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "View";
+            return "View?faces-redirect=true";
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "List";
+            return "List?faces-redirect=true";
         }
     }
 
@@ -192,13 +196,13 @@ public class PollsController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "List";
+        return "List?faces-redirect=true";
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "List";
+        return "List?faces-redirect=true";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {

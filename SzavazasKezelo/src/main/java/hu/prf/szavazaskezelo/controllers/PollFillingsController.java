@@ -1,14 +1,14 @@
 package hu.prf.szavazaskezelo.controllers;
 
-import hu.prf.szavazaskezelo.entitites.PollFillings;
+import hu.prf.szavazaskezelo.beans.PollFillingsFacade;
 import hu.prf.szavazaskezelo.controllers.util.JsfUtil;
 import hu.prf.szavazaskezelo.controllers.util.PaginationHelper;
-import hu.prf.szavazaskezelo.beans.PollFillingsFacade;
-
+import hu.prf.szavazaskezelo.entitites.PollFillings;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -19,7 +19,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "pollFillingsController")
-@SessionScoped
+@RequestScoped
 public class PollFillingsController implements Serializable {
 
     private PollFillings current;
