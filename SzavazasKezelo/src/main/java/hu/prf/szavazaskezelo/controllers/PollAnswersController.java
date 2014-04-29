@@ -92,7 +92,7 @@ public class PollAnswersController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List";
+        return "header_poll_answer_navigation";
     }
 
     public String prepareView() {

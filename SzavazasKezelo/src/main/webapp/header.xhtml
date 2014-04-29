@@ -9,20 +9,23 @@
     <div class="pure-g" id="header-menu">
         <div class="pure-u-1-8"></div>
         <div class="pure-u-3-4">
-            <div class="pure-g">
-                <div class="pure-u-1-4 header-menu-item">
-                    <h:link outcome="header_poll_navigation" value="Szavazások" />
+            <h:form>
+                <div class="pure-g">
+                    <div class="pure-u-1-4 header-menu-item">
+                        <h:commandLink value="Szavazások" action="#{pollsController.prepareList()}" />
+                    </div>
+                    <div class="pure-u-1-4 header-menu-item">
+                        <h:commandLink value="Kérdések" action="#{pollQuestionsController.prepareList()}" />
+                    </div>
+                    <div class="pure-u-1-4 header-menu-item">
+                        <h:commandLink value="Válaszok" action="#{pollAnswersController.prepareList()}" />
+                    </div>
+                    <div class="pure-u-1-4 header-menu-item">
+                        <h:commandLink value="Válasz Kitöltések" action="#{pollFillingsController.prepareList()}" />
+                    </div>
+
                 </div>
-                <div class="pure-u-1-4 header-menu-item">
-                    <h:link outcome="header_poll_question_navigation" value="Kérdések" />
-                </div>
-                <div class="pure-u-1-4 header-menu-item">
-                    <h:link outcome="header_poll_answer_navigation" value="Válaszok" />
-                </div>
-                <div class="pure-u-1-4 header-menu-item">
-                    <h:link outcome="header_poll_filling_navigation" value="Válasz Kitöltések" />
-                </div>  
-            </div>
+            </h:form>
         </div>
         <div class="pure-u-1-8"></div>
     </div>

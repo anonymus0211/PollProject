@@ -80,7 +80,7 @@ public class PollsController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List?faces-redirect=true";
+        return "header_poll_navigation";
     }
 
     public String prepareView() {

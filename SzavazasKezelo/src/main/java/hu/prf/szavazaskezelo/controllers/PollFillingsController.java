@@ -64,7 +64,7 @@ public class PollFillingsController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List";
+        return "header_poll_filling_navigation";
     }
 
     public String prepareView() {
