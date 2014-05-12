@@ -25,7 +25,7 @@
                 <h:commandLink action="#{pollQuestionsController.prepareCreate}" value="#{bundle.PollQuestionCreateLink}" class="pure-button button-success"/>
                 <h:link outcome="Edit" value="#{bundle.EditLink}" class="pure-button button-update button-margin-vertical"/>
                 <h:commandLink action="#{pollQuestionsController.destroyAndView}" value="#{bundle.DestroyLink}" class="pure-button button-delete"/>
-                <h:commandLink action="#{pollQuestionsController.prepareList()}" value="#{bundle.DestroyLink}" class="pure-button button-delete"/>
+                <h:commandLink action="#{pollQuestionsController.prepareList()}" value="#{bundle.PollQuestionsShowAllLink}" class="pure-button button-margin-vertical"/>
                 
             </h:form>
         </ui:define>

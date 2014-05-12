@@ -82,8 +82,16 @@ public class PollQuestionsController implements Serializable {
     }
 
     public String prepareView() {
+        
+        //if (poll_question_id == null){
         current = (PollQuestions) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+       // }else {
+            
+        //    current = (PollQuestions) getFacade().find( Long.parseLong(poll_question_id));
+            //System.out.println("CURRENTLY_SELECTED: " + current.toString());
+        //}
+        
         return "View";
     }
 
