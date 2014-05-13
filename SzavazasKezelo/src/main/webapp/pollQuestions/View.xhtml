@@ -22,6 +22,7 @@
                         <f:param value="#{pollQuestionsController.selected.pollId.id}" name="poll_id" ></f:param>
                     </h:commandLink>
                 </h:panelGrid>
+                <br />
                 <h:commandLink action="#{pollQuestionsController.prepareCreate}" value="#{bundle.PollQuestionCreateLink}" class="pure-button button-success"/>
                 <h:link outcome="Edit" value="#{bundle.EditLink}" class="pure-button button-update button-margin-vertical"/>
                 <h:commandLink action="#{pollQuestionsController.destroy}" value="#{bundle.DestroyLink}" class="pure-button button-delete"/>

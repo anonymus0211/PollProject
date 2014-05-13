@@ -30,7 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "PollFillings.findAll", query = "SELECT p FROM PollFillings p"),
-    @NamedQuery(name = "PollFillings.findById", query = "SELECT p FROM PollFillings p WHERE p.id = :id")})
+    @NamedQuery(name = "PollFillings.findById", query = "SELECT p FROM PollFillings p WHERE p.id = :id"),
+    @NamedQuery(name = "PollFillings.statistic", query = "SELECT count(p) FROM PollFillings p WHERE p.pollQuestionId = :questionid GROUP BY p.pollAnswersId")
+})
+
 public class PollFillings implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

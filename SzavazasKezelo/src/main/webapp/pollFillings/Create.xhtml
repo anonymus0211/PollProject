@@ -23,6 +23,8 @@
                     <h:selectOneMenu id="pollAnswersId" value="#{pollFillingsController.selected.pollAnswersId}" title="#{bundle.CreatePollFillingsTitle_pollAnswersId}" >
                         <f:selectItems value="#{pollAnswersController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    
+                    
                 </h:panelGrid>
                 <h:commandLink action="#{pollFillingsController.create}" value="#{bundle.SaveLink}" class="pure-button button-success button-margin"/>
                 <br />

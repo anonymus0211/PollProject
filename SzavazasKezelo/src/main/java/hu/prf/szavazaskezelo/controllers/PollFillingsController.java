@@ -18,6 +18,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.primefaces.model.chart.PieChartModel;
 
 @ManagedBean(name = "pollFillingsController")
 @RequestScoped
@@ -29,6 +30,7 @@ public class PollFillingsController implements Serializable {
     private hu.prf.szavazaskezelo.beans.PollFillingsFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+       private PieChartModel pieModel;
     
     @ManagedProperty("#{param.poll_answer_id}")
     private String poll_answer_id;
@@ -37,6 +39,7 @@ public class PollFillingsController implements Serializable {
     private String poll_question_id;
 
     public PollFillingsController() {
+        
     }
 
     public PollFillings getSelected() {
@@ -94,6 +97,8 @@ public class PollFillingsController implements Serializable {
     public String prepareView() {
         current = (PollFillings) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        
+        createPieModel();
         return "View";
     }
 
@@ -210,6 +215,23 @@ public class PollFillingsController implements Serializable {
 
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+    }
+    
+    
+    private void createPieModel() {
+        pieModel = new PieChartModel();
+        
+       
+        
+        pieModel.set(current.getPollAnswersId().getAnswer(), current.getPollQuestionId().getPollAnswersSet().size());
+        pieModel.set("Brand 2", 0);
+        pieModel.set("Brand 3", 0);
+        pieModel.set("Brand 4", 0);
+
+    }
+    
+     public PieChartModel getPieModel() {
+        return pieModel;
     }
 
     @FacesConverter(forClass = PollFillings.class)

@@ -23,6 +23,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
+
 @ManagedBean(name = "pollQuestionsController")
 @SessionScoped
 public class PollQuestionsController implements Serializable {
@@ -37,7 +38,9 @@ public class PollQuestionsController implements Serializable {
     private String poll_question_id;
     private String poll_id;
 
+
     public PollQuestionsController() {
+ 
     }
 
     public PollQuestions getSelected() {
@@ -256,6 +259,7 @@ public class PollQuestionsController implements Serializable {
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
+
 
     @FacesConverter(forClass = PollQuestions.class)
     public static class PollQuestionsControllerConverter implements Converter {

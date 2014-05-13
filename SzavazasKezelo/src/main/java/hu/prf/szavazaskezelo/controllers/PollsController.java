@@ -18,6 +18,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
+
 @ManagedBean(name = "pollsController")
 @SessionScoped
 public class PollsController implements Serializable {
@@ -28,12 +29,14 @@ public class PollsController implements Serializable {
     private hu.prf.szavazaskezelo.beans.PollsFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+   
 
     //@ManagedProperty("#{param.poll_id}")
     private String poll_id;
 
     public PollsController() {
-
+        
+    
     }
 
     @PostConstruct
@@ -220,6 +223,7 @@ public class PollsController implements Serializable {
     public void setpoll_id(String poll_id) {
         this.poll_id = poll_id;
     }
+
 
     @FacesConverter(forClass = Polls.class)
     public static class PollsControllerConverter implements Converter {
