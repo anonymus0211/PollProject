@@ -25,10 +25,10 @@
                             <h:link outcome="poll_question_edit_navigation" value="#{bundle.EditLink}" class="pure-button button-update button-margin-all">
                                 <f:param name="poll_question_id" value="#{question.getId()}"></f:param>
                             </h:link>
-                            <ul class="poll_answers">
                                 <h:commandLink value="#{bundle.ListPollAnswersCreateLink}" action="#{pollAnswersController.prepareCreatePartial()}" class="pure-button button-success button-margin-all">
                                     <f:param name="poll_question_id" value="#{question.id}"></f:param>
                                 </h:commandLink>
+                            <ul class="poll_answers">
                                 <c:forEach var="answer" items="#{question.getPollAnswersSet()}">
                                     <li>
                                         <h:outputText value="#{answer.getAnswer()}"></h:outputText>
@@ -38,18 +38,20 @@
                                     </li>
                                 </c:forEach>
                             </ul>
-
+                            <hr />
 
                         </li>
 
                     </c:forEach>
                 </ul>
                 <br />
-                <h:commandLink action="#{pollsController.prepareCreate}" value="#{bundle.Filling}" class="pure-button button-poll button-margin"/>
                 <h:commandLink action="#{pollsController.prepareCreate}" value="#{bundle.PollsCreateLink}" class="pure-button button-success  button-margin-vertical"/>
                 <h:commandLink action="#{pollsController.prepareEdit()}" value="#{bundle.EditLink}" class="pure-button button-update button-margin-vertical"/>
                 <h:commandLink action="#{pollsController.destroyAndView}" value="#{bundle.DestroyLink}" class="pure-button button-delete button-margin-vertical"/>
                 <h:commandLink action="#{pollsController.prepareList}" value="#{bundle.PollsShowAllLink}" class="pure-button button-margin-vertical"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.IndexLink}" class="pure-button"/>           
             </h:form>
         </ui:define>
     </ui:composition>

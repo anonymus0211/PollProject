@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -28,6 +29,12 @@ public class PollFillingsController implements Serializable {
     private hu.prf.szavazaskezelo.beans.PollFillingsFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    @ManagedProperty("#{param.poll_answer_id}")
+    private String poll_answer_id;
+    
+    @ManagedProperty("#{param.poll_question_id}")
+    private String poll_question_id;
 
     public PollFillingsController() {
     }
@@ -38,6 +45,23 @@ public class PollFillingsController implements Serializable {
             selectedItemIndex = -1;
         }
         return current;
+    }
+    
+    
+    public String getpoll_answer_id(){
+        return poll_answer_id;
+    }
+    
+    public void setpoll_answer_id(String poll_answer_id){
+        this.poll_answer_id = poll_answer_id;
+    }
+    
+    public String getpoll_question_id(){
+        return poll_question_id;
+    }
+    
+    public void setpoll_question_id(String poll_question_id){
+        this.poll_question_id = poll_question_id;
     }
 
     private PollFillingsFacade getFacade() {

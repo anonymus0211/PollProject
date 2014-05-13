@@ -21,12 +21,12 @@
                     </h:inputText>
                 </h:panelGrid>
                 <h:commandLink action="#{pollsController.update}" value="#{bundle.SaveLink}" class="pure-button button-success"/>
-                <br />
-                <br />
                 <h:link outcome="View" value="#{bundle.EditPollsViewLink}" class="pure-button button-margin"/>
                 <br />
                 <h:commandLink action="#{pollsController.prepareList}" value="#{bundle.PollsShowAllLink}" immediate="true" class="pure-button"/>
-
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.IndexLink}" class="pure-button"/>
             </h:form>
         </ui:define>
     </ui:composition>

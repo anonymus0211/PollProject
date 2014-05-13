@@ -14,13 +14,15 @@
                 <h:messages errorStyle="background-color: red; padding: 0.5em 0 0.5em 1em; color: white" infoStyle="background-color: green; padding: 0.5em 0 0.5em 1em; color: white" class="message-box" layout="list" />
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewPollFillingsLabel_id}"/>
-                    <h:outputText value="#{pollFillingsController.selected.id}" title="#{bundle.ViewPollFillingsTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewPollFillingsLabel_pollQuestionId}"/>
-                    <h:outputText value="#{pollFillingsController.selected.pollQuestionId}" title="#{bundle.ViewPollFillingsTitle_pollQuestionId}"/>
-                    <h:outputText value="#{bundle.ViewPollFillingsLabel_pollAnswersId}"/>
-                    <h:outputText value="#{pollFillingsController.selected.pollAnswersId}" title="#{bundle.ViewPollFillingsTitle_pollAnswersId}"/>
+                <h:panelGrid columns="2">   
+                <h:outputText value="#{bundle.ViewPollFillingsLabel_pollQuestionId}"/>
+                    <h:commandLink value="#{pollFillingsController.selected.pollQuestionId.pollQuestion}" action="poll_question_navigation">
+                        <f:param value="#{pollFillingsController.selected.pollQuestionId.id}" name="poll_question_id" ></f:param>
+                    </h:commandLink>
+                <h:outputText value="#{bundle.ViewPollFillingsLabel_pollAnswersId}"/>
+                    <h:commandLink value="#{pollFillingsController.selected.pollAnswersId.answer}" action="poll_answer_navigation">
+                        <f:param value="#{pollFillingsController.selected.pollAnswersId.id}" name="poll_answer_id" ></f:param>
+                    </h:commandLink>              
                 </h:panelGrid>
                 <h:commandLink action="#{pollFillingsController.prepareCreate}" value="#{bundle.ViewPollFillingsCreateLink}" class="pure-button button-success" />
                 <h:link outcome="Edit" value="#{bundle.ViewPollFillingsEditLink}" class="pure-button button-update button-margin-vertical"/>
@@ -29,7 +31,9 @@
                 <br />
                 <br />
                 <h:link outcome="/index" value="#{bundle.ViewPollFillingsIndexLink}"/>
-
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.IndexLink}" class="pure-button"/>
             </h:form>
         </ui:define>
     </ui:composition>
